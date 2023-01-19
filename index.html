@@ -11,12 +11,10 @@
     <p>hello world</p>
     <script>
         let socket=io()
-        // recieving message from server side 
-        socket.on('Nofil',(data)=>{
-            document.write(data.name)
+        socket.on('newuser',(data)=>{
+            document.body.innerHTML = '';
+            document.write(data.message)
         })
-        // sending message to client side 
-        socket.emit('nofil','my name is nofil')
     </script>
 </body>
 </html>
