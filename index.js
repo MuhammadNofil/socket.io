@@ -10,18 +10,19 @@ app.get('/',(req,res)=>{
     let filename="index.html"
     res.sendFile(filename,options)
 })
+// name space are use to create multiple routes like thing multiple connection
 
-let users=0;
-io.on('connection',(socket)=>{
+const route1=io.of('/hello')
+const route2=io.of('/Hey')
+
+route1.on('connection',(socket)=>{
     console.log("user is connected")
-    users++;
-    io.sockets.emit('newuser',{message:"wlcome to chat room"})
-    socket.broadcast.emit('newuser', {message: users +" user connected"})
+    route1.emit('newuser',{message:"wlcome to chat room"})
+    socket.broadcast.emit('newuser', {message: " user connected"})
     
     socket.on("disconnect",()=>{
         console.log("user is disconnected")
-        users--;
-        socket.broadcast.emit('newuser', {message:users + "users disconnected"})
+        socket.broadcast.emit('newuser', {message:"users disconnected"})
     })
 })
 
