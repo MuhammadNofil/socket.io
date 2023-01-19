@@ -10,10 +10,10 @@
 <body>
     <p>hello world</p>
     <script>
-        let socket=io("/hello")
+        let socket=io()
         socket.on('newuser',(data)=>{
             document.body.innerHTML = '';
-            document.write(data.message)
+            document.write(data)
         })
     </script>
 </body>
